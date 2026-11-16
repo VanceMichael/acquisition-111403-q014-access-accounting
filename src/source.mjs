@@ -22,5 +22,7 @@ export function createClient(origin, timeout=5000) {
   client.origin = root.origin;
   client.exchanges = exchanges;
   client.wait = delay;
+  /** 取出已记录的响应凭据并清空，便于逐页归档时不重复保存同一份原文。 */
+  client.drainExchanges = () => exchanges.splice(0, exchanges.length);
   return client;
 }
